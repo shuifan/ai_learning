@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI资讯导航</title>
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --bg-color: #fff;
+        --text-color: #333;
+        --card-bg: #f8f9fa;
+        --card-border: #3498db;
+        --header-color: #2c3e50;
+        --subheader-color: #2980b9;
+        --description-color: #666;
+        --footer-color: #7f8c8d;
+        --shadow-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .dark-mode {
+        --primary-color: #61afef;
+        --bg-color: #1e2127;
+        --text-color: #abb2bf;
+        --card-bg: #282c34;
+        --card-border: #61afef;
+        --header-color: #e5c07b;
+        --subheader-color: #61afef;
+        --description-color: #abb2bf;
+        --footer-color: #5c6370;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .date {
+        font-size: 0.9em;
+        color: var(--description-color);
+      }
+
+      .theme-toggle {
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.2em;
+      }
+
+      h1 {
+        color: var(--header-color);
+        text-align: center;
+        border-bottom: 2px solid var(--primary-color);
+        padding-bottom: 10px;
+      }
+
+      h2 {
+        color: var(--subheader-color);
+        margin-top: 30px;
+        border-left: 4px solid var(--primary-color);
+        padding-left: 10px;
+      }
+
+      .category {
+        background-color: var(--card-bg);
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px var(--shadow-color);
+      }
+
+      .resource {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: var(--bg-color);
+        border-radius: 3px;
+        border-left: 3px solid var(--card-border);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .resource-content {
+        flex: 1;
+      }
+
+      .star-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #ccc;
+        font-size: 1.2em;
+        transition: color 0.3s;
+      }
+
+      .starred {
+        color: #f1c40f;
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .description {
+        color: var(--description-color);
+        font-size: 0.9em;
+        margin-top: 5px;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        color: var(--footer-color);
+        font-size: 0.9em;
+      }
+
+      #favorites {
+        display: none;
+        background-color: var(--card-bg);
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px var(--shadow-color);
+      }
+
+      #favorites.show {
+        display: block;
+      }
+
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 20px 0;
+      }
+
+      button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="date" id="current-date"></div>
+      <button class="theme-toggle" id="theme-toggle">🌓</button>
+    </header>
+
+    <h1>AI资讯导航</h1>
+    <p style="text-align: center">每日了解AI前沿动态的一站式平台</p>
+
+    <div class="controls">
+      <button id="show-favorites">显示收藏</button>
+      <button id="show-all">显示全部</button>
+    </div>
+
+    <div id="favorites" class="category">
+      <h2>我的收藏</h2>
+      <p id="no-favorites" style="text-align: center">
+        还没有收藏任何资源，点击⭐收藏您感兴趣的网站
+      </p>
+    </div>
+
+    <div class="category">
+      <h2>1. 期刊</h2>
+
+      <div class="resource" data-id="thebatch">
+        <div class="resource-content">
+          <a href="https://www.deeplearning.ai/the-batch/" target="_blank"
+            >The Batch by DeepLearning.AI</a
+          >
+          <div class="description">吴恩达团队的AI周报</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="ruanyf-weekly">
+        <div class="resource-content">
+          <a
+            href="https://github.com/ruanyf/weekly?tab=readme-ov-file"
+            target="_blank"
+            >阮一峰的周刊</a
+          >
+          <div class="description">科技爱好者周刊，每周五发布</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>2. 行业领袖</h2>
+
+      <div class="resource" data-id="deepmind">
+        <div class="resource-content">
+          <a href="https://deepmind.google/discover/blog/" target="_blank"
+            >Google DeepMind Blog</a
+          >
+          <div class="description">AlphaGo、Gemini等突破性研究</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="openai">
+        <div class="resource-content">
+          <a href="https://openai.com/blog" target="_blank">OpenAI Blog</a>
+          <div class="description">ChatGPT、GPT-4等模型官方信息</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="meta">
+        <div class="resource-content">
+          <a href="https://ai.meta.com/blog/" target="_blank">Meta AI Blog</a>
+          <div class="description">Llama系列、AI基础设施研究</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="anthropic">
+        <div class="resource-content">
+          <a href="https://www.anthropic.com/news" target="_blank"
+            >Anthropic Research Blog</a
+          >
+          <div class="description">Claude模型与AI安全研究</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="anthropic-engineering">
+        <div class="resource-content">
+          <a href="https://www.anthropic.com/engineering" target="_blank"
+            >Anthropic Engineering Blog</a
+          >
+          <div class="description">
+            构建可靠AI系统的工程实践，Claude Code最佳实践
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="huggingface">
+        <div class="resource-content">
+          <a href="https://huggingface.co/blog" target="_blank"
+            >Hugging Face Blog</a
+          >
+          <div class="description">Transformer库、开源模型与应用</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="microsoft">
+        <div class="resource-content">
+          <a
+            href="https://www.microsoft.com/en-us/research/blog/"
+            target="_blank"
+            >Microsoft Research AI</a
+          >
+          <div class="description">微软AI研究与Copilot相关技术</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="google-research">
+        <div class="resource-content">
+          <a href="https://research.google/blog/" target="_blank"
+            >Google Research Blog</a
+          >
+          <div class="description">
+            Google研究团队最新成果，涵盖生成式AI、量子计算等前沿领域
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>3. 开源社区</h2>
+
+      <div class="resource" data-id="github">
+        <div class="resource-content">
+          <a href="https://github.com/trending" target="_blank"
+            >GitHub Trending</a
+          >
+          <div class="description">每日热门AI开源项目</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="huggingface-models">
+        <div class="resource-content">
+          <a href="https://huggingface.co/models" target="_blank"
+            >Hugging Face Models</a
+          >
+          <div class="description">数千个预训练AI模型库</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="anthropics-github">
+        <div class="resource-content">
+          <a href="https://github.com/anthropics" target="_blank"
+            >Anthropic GitHub</a
+          >
+          <div class="description">Claude相关工具与SDK</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="langchain">
+        <div class="resource-content">
+          <a href="https://github.com/langchain-ai/langchain" target="_blank"
+            >LangChain</a
+          >
+          <div class="description">AI应用框架，构建与大语言模型的应用</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="system-prompts">
+        <div class="resource-content">
+          <a
+            href="https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools"
+            target="_blank"
+            >AI工具系统提示集合</a
+          >
+          <div class="description">
+            v0、Cursor、Devin等AI工具的完整系统提示和模型配置
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="agno">
+        <div class="resource-content">
+          <a href="https://github.com/agno-agi/agno" target="_blank">Agno</a>
+          <div class="description">
+            全栈多智能体系统框架，具备记忆、知识和推理能力
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>4. 实时新闻</h2>
+
+      <div class="resource" data-id="mit">
+        <div class="resource-content">
+          <a
+            href="https://www.technologyreview.com/topic/artificial-intelligence/"
+            target="_blank"
+            >MIT Technology Review - AI</a
+          >
+          <div class="description">深度技术分析与行业洞察</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="decoder">
+        <div class="resource-content">
+          <a href="https://the-decoder.com/" target="_blank">The Decoder</a>
+          <div class="description">专注AI新闻的独立媒体</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="synced">
+        <div class="resource-content">
+          <a href="https://syncedreview.com/" target="_blank">Synced</a>
+          <div class="description">中英双语AI资讯（机器之心国际版）</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="google-news">
+        <div class="resource-content">
+          <a href="https://news.google.com/search?q=AI&hl=en-US" target="_blank"
+            >Google News - AI专题</a
+          >
+          <div class="description">AI相关新闻聚合</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="aitimes">
+        <div class="resource-content">
+          <a href="https://www.aitimes.com/" target="_blank">AI Times</a>
+          <div class="description">聚焦AI产业与商业应用的新闻</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>5. 社交与社区</h2>
+
+      <div class="resource" data-id="shrivu-blog">
+        <div class="resource-content">
+          <a href="https://blog.sshh.io/" target="_blank">Shrivu's Substack</a>
+          <div class="description">AI、软件工程与网络安全的个人博客</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="reddit">
+        <div class="resource-content">
+          <a href="https://www.reddit.com/r/MachineLearning/" target="_blank"
+            >Reddit r/MachineLearning</a
+          >
+          <div class="description">最大ML社区讨论最新论文</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="topsub">
+        <div class="resource-content">
+          <a href="https://topsub.cc/" target="_blank">TopSub</a>
+          <div class="description">Reddit特定频道最热门帖子聚合</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="lecun">
+        <div class="resource-content">
+          <a href="https://twitter.com/ylecun" target="_blank"
+            >Yann LeCun (@ylecun)</a
+          >
+          <div class="description">Meta首席AI科学家</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="anthropic-twitter">
+        <div class="resource-content">
+          <a href="https://twitter.com/AnthropicAI" target="_blank"
+            >Anthropic (@AnthropicAI)</a
+          >
+          <div class="description">Claude模型官方账号</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="huggingface-twitter">
+        <div class="resource-content">
+          <a href="https://twitter.com/huggingface" target="_blank"
+            >Hugging Face (@huggingface)</a
+          >
+          <div class="description">开源AI社区动态</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="altman">
+        <div class="resource-content">
+          <a href="https://twitter.com/sama" target="_blank"
+            >Sam Altman (@sama)</a
+          >
+          <div class="description">OpenAI CEO</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="aisnakeoil">
+        <div class="resource-content">
+          <a href="https://www.aisnakeoil.com/" target="_blank">AI Snake Oil</a>
+          <div class="description">
+            Sayash Kapoor和Arvind Narayanan的AI批判博客
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="simonwillison">
+        <div class="resource-content">
+          <a href="https://simonwillison.net/" target="_blank"
+            >Simon Willison's Weblog</a
+          >
+          <div class="description">
+            深度技术博客，专注AI、LLM推理、提示注入等前沿话题分析
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="medium">
+        <div class="resource-content">
+          <a href="https://medium.com/" target="_blank">Medium</a>
+          <div class="description">
+            深度阅读、写作和理解的平台，包含丰富的AI相关内容
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>7. AI工具追踪</h2>
+
+      <div class="resource" data-id="futuretools">
+        <div class="resource-content">
+          <a href="https://www.futuretools.io/" target="_blank">Future Tools</a>
+          <div class="description">AI工具导航与评测</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="futurepedia">
+        <div class="resource-content">
+          <a href="https://www.futurepedia.io/" target="_blank">Futurepedia</a>
+          <div class="description">AI工具目录，分类细致</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="category">
+      <h2>8. 学习资源</h2>
+
+      <div class="resource" data-id="learnprompting">
+        <div class="resource-content">
+          <a href="https://learnprompting.org/docs/introduction" target="_blank"
+            >Learn Prompting</a
+          >
+          <div class="description">
+            免费开源的提示工程（Prompt Engineering）教程
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p id="last-updated">
+        最后更新: <span id="update-date">2024年4月</span> |
+        建议添加到书签定期查看
+      </p>
+      <p>提示：点击⭐收藏您常用的资源，使用暗黑模式减少眼部疲劳</p>
+    </div>
+
+    <script>
+      // 设置当前日期
+      function setCurrentDate() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("current-date").textContent =
+          now.toLocaleDateString("zh-CN", options);
+      }
+
+      // 暗黑模式切换
+      function setupThemeToggle() {
+        const themeToggle = document.getElementById("theme-toggle");
+
+        // 检查本地存储的主题设置
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark") {
+          document.body.classList.add("dark-mode");
+        }
+
+        themeToggle.addEventListener("click", () => {
+          document.body.classList.toggle("dark-mode");
+
+          // 保存主题设置到本地存储
+          if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+          } else {
+            localStorage.setItem("theme", "light");
+          }
+        });
+      }
+
+      // 收藏功能
+      function setupFavorites() {
+        const starButtons = document.querySelectorAll(".star-btn");
+        const favoritesSection = document.getElementById("favorites");
+        const noFavoritesMsg = document.getElementById("no-favorites");
+        const showFavoritesBtn = document.getElementById("show-favorites");
+        const showAllBtn = document.getElementById("show-all");
+
+        // 从本地存储加载收藏
+        const savedFavorites =
+          JSON.parse(localStorage.getItem("favorites")) || [];
+
+        // 初始化收藏状态
+        savedFavorites.forEach((id) => {
+          const resource = document.querySelector(`.resource[data-id="${id}"]`);
+          if (resource) {
+            const starBtn = resource.querySelector(".star-btn");
+            starBtn.textContent = "★";
+            starBtn.classList.add("starred");
+          }
+        });
+
+        // 更新收藏部分的显示
+        function updateFavorites() {
+          const favorites = document.querySelectorAll(".star-btn.starred");
+
+          // 显示或隐藏"无收藏"消息
+          if (favorites.length === 0) {
+            noFavoritesMsg.style.display = "block";
+          } else {
+            noFavoritesMsg.style.display = "none";
+          }
+
+          // 更新本地存储
+          const favoriteIds = Array.from(favorites).map(
+            (btn) => btn.closest(".resource").dataset.id
+          );
+          localStorage.setItem("favorites", JSON.stringify(favoriteIds));
+        }
+
+        // 添加收藏按钮事件
+        starButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            btn.classList.toggle("starred");
+            btn.textContent = btn.classList.contains("starred") ? "★" : "☆";
+            updateFavorites();
+          });
+        });
+
+        // 显示收藏/显示全部切换
+        showFavoritesBtn.addEventListener("click", () => {
+          favoritesSection.classList.add("show");
+
+          // 只显示收藏的资源
+          document.querySelectorAll(".resource").forEach((resource) => {
+            const isStarred = resource.querySelector(".star-btn.starred");
+            if (!isStarred) {
+              resource.style.display = "none";
+            } else {
+              resource.style.display = "flex";
+            }
+          });
+        });
+
+        showAllBtn.addEventListener("click", () => {
+          favoritesSection.classList.remove("show");
+
+          // 显示所有资源
+          document.querySelectorAll(".resource").forEach((resource) => {
+            resource.style.display = "flex";
+          });
+        });
+
+        // 初始化收藏部分
+        updateFavorites();
+      }
+
+      // 页面加载时初始化所有功能
+      document.addEventListener("DOMContentLoaded", () => {
+        setCurrentDate();
+        setupThemeToggle();
+        setupFavorites();
+
+        // 设置更新日期
+        const today = new Date();
+        const month = today.toLocaleString("zh-CN", { month: "long" });
+        document.getElementById(
+          "update-date"
+        ).textContent = `${today.getFullYear()}年${month}`;
+      });
+    </script>
+  </body>
+</html>
