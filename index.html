@@ -6,41 +6,41 @@
     <title>AI资讯导航</title>
     <style>
       :root {
-        --primary-color: #007aff;
-        --primary-hover: #0056cc;
-        --bg-color: #fbfbfd;
-        --text-color: #1d1d1f;
-        --text-secondary: #86868b;
-        --card-bg: rgba(255, 255, 255, 0.8);
-        --card-border: rgba(0, 122, 255, 0.1);
-        --header-color: #1d1d1f;
-        --subheader-color: #007aff;
-        --description-color: #86868b;
-        --footer-color: #86868b;
-        --shadow-light: rgba(0, 0, 0, 0.04);
-        --shadow-medium: rgba(0, 0, 0, 0.08);
-        --border-light: rgba(0, 0, 0, 0.04);
-        --glass-bg: rgba(255, 255, 255, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.2);
+        --primary-color: #5b7c99;
+        --primary-hover: #4a6a85;
+        --bg-color: #f5f3f0;
+        --text-color: #2c2c2c;
+        --text-secondary: #6b6b6b;
+        --card-bg: rgba(255, 253, 250, 0.85);
+        --card-border: rgba(91, 124, 153, 0.12);
+        --header-color: #2c2c2c;
+        --subheader-color: #5b7c99;
+        --description-color: #6b6b6b;
+        --footer-color: #6b6b6b;
+        --shadow-light: rgba(0, 0, 0, 0.03);
+        --shadow-medium: rgba(0, 0, 0, 0.06);
+        --border-light: rgba(0, 0, 0, 0.05);
+        --glass-bg: rgba(255, 253, 250, 0.75);
+        --glass-border: rgba(255, 253, 250, 0.3);
       }
 
       .dark-mode {
-        --primary-color: #0a84ff;
-        --primary-hover: #409cff;
-        --bg-color: #000000;
-        --text-color: #f5f5f7;
-        --text-secondary: #86868b;
-        --card-bg: rgba(28, 28, 30, 0.8);
-        --card-border: rgba(10, 132, 255, 0.1);
-        --header-color: #f5f5f7;
-        --subheader-color: #0a84ff;
-        --description-color: #86868b;
-        --footer-color: #86868b;
+        --primary-color: #d4a574;
+        --primary-hover: #e6b887;
+        --bg-color: #1a1a1a;
+        --text-color: #e8e6e3;
+        --text-secondary: #a8a29e;
+        --card-bg: rgba(42, 42, 42, 0.8);
+        --card-border: rgba(212, 165, 116, 0.15);
+        --header-color: #e8e6e3;
+        --subheader-color: #d4a574;
+        --description-color: #a8a29e;
+        --footer-color: #a8a29e;
         --shadow-light: rgba(0, 0, 0, 0.3);
         --shadow-medium: rgba(0, 0, 0, 0.5);
-        --border-light: rgba(255, 255, 255, 0.1);
-        --glass-bg: rgba(28, 28, 30, 0.7);
-        --glass-border: rgba(255, 255, 255, 0.1);
+        --border-light: rgba(255, 255, 255, 0.08);
+        --glass-bg: rgba(42, 42, 42, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.08);
       }
 
       * {
@@ -165,13 +165,13 @@
 
       .resource:hover {
         transform: translateY(-1px);
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 253, 250, 0.95);
         border-color: var(--primary-color);
         box-shadow: 0 4px 24px var(--shadow-light);
       }
 
       .dark-mode .resource:hover {
-        background: rgba(44, 44, 46, 0.9);
+        background: rgba(52, 52, 52, 0.9);
       }
 
       .resource:last-child {
@@ -277,7 +277,7 @@
       button:hover {
         background: var(--primary-hover);
         transform: translateY(-1px);
-        box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+        box-shadow: 0 4px 20px rgba(91, 124, 153, 0.25);
       }
 
       button:active {
@@ -639,57 +639,48 @@
     </div>
 
     <div class="category">
-      <h2>4. 新闻媒体与资讯聚合</h2>
+      <h2>4. 技术资讯与社区</h2>
 
-      <div class="resource" data-id="mit">
+      <div class="resource" data-id="hackernews">
         <div class="resource-content">
-          <a
-            href="https://www.technologyreview.com/topic/artificial-intelligence/"
-            target="_blank"
-            >MIT Technology Review - AI</a
+          <a href="https://news.ycombinator.com/news" target="_blank"
+            >Hacker News</a
           >
-          <div class="description">深度技术分析与行业洞察</div>
+          <div class="description">
+            Y Combinator的科技资讯社区，关注创业、编程和技术创新
+          </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="decoder">
+      <div class="resource" data-id="hackernoon">
         <div class="resource-content">
-          <a href="https://the-decoder.com/" target="_blank">The Decoder</a>
-          <div class="description">专注AI新闻的独立媒体</div>
+          <a href="https://hackernoon.com/" target="_blank">HackerNoon</a>
+          <div class="description">
+            技术人阅读、写作和学习平台，45k+贡献者，涵盖AI、编程、创业等各类技术故事
+          </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="synced">
+      <div class="resource" data-id="reddit">
         <div class="resource-content">
-          <a href="https://syncedreview.com/" target="_blank">Synced</a>
-          <div class="description">中英双语AI资讯（机器之心国际版）</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="google-news">
-        <div class="resource-content">
-          <a href="https://news.google.com/search?q=AI&hl=en-US" target="_blank"
-            >Google News - AI专题</a
+          <a href="https://www.reddit.com/r/MachineLearning/" target="_blank"
+            >Reddit r/MachineLearning</a
           >
-          <div class="description">AI相关新闻聚合</div>
+          <div class="description">最大ML社区讨论最新论文</div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="aitimes">
+      <div class="resource" data-id="topsub">
         <div class="resource-content">
-          <a href="https://www.aitimes.com/" target="_blank">AI Times</a>
-          <div class="description">聚焦AI产业与商业应用的新闻</div>
+          <a href="https://topsub.cc/" target="_blank">TopSub</a>
+          <div class="description">Reddit特定频道最热门帖子聚合</div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
-    </div>
 
-    <div class="category">
-      <h2>5. 专业期刊与个人博客</h2>
       <div class="resource" data-id="medium">
         <div class="resource-content">
           <a href="https://medium.com/" target="_blank">Medium</a>
@@ -699,13 +690,19 @@
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
+    </div>
+
+    <div class="category">
+      <h2>5. 周刊与Newsletter</h2>
 
       <div class="resource" data-id="thebatch">
         <div class="resource-content">
           <a href="https://www.deeplearning.ai/the-batch/" target="_blank"
             >The Batch by DeepLearning.AI</a
           >
-          <div class="description">吴恩达团队的AI周报</div>
+          <div class="description">
+            吴恩达团队的AI周报，每周精选AI资讯与深度解读
+          </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
@@ -733,18 +730,10 @@
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
+    </div>
 
-      <div class="resource" data-id="jose-parreno-garcia">
-        <div class="resource-content">
-          <a href="https://joseparreogarcia.substack.com/" target="_blank"
-            >Senior Data Science Lead</a
-          >
-          <div class="description">
-            帮助管理者构建世界级团队，数据专业人士掌握讲故事技巧，指导数据科学入门者
-          </div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
+    <div class="category">
+      <h2>6. 个人博客与深度思考</h2>
 
       <div class="resource" data-id="simonwillison">
         <div class="resource-content">
@@ -762,6 +751,18 @@
         <div class="resource-content">
           <a href="https://blog.sshh.io/" target="_blank">Shrivu's Substack</a>
           <div class="description">AI、软件工程与网络安全的个人博客</div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="jose-parreno-garcia">
+        <div class="resource-content">
+          <a href="https://joseparreogarcia.substack.com/" target="_blank"
+            >Senior Data Science Lead</a
+          >
+          <div class="description">
+            帮助管理者构建世界级团队，数据专业人士掌握讲故事技巧，指导数据科学入门者
+          </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
@@ -786,77 +787,6 @@
           <div class="description">
             领导力专家Simon
             Sinek的深度文章，探讨目标发现、领导力发展和组织文化建设
-          </div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>6. 社区讨论与批判性思考</h2>
-
-      <div class="resource" data-id="reddit">
-        <div class="resource-content">
-          <a href="https://www.reddit.com/r/MachineLearning/" target="_blank"
-            >Reddit r/MachineLearning</a
-          >
-          <div class="description">最大ML社区讨论最新论文</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="topsub">
-        <div class="resource-content">
-          <a href="https://topsub.cc/" target="_blank">TopSub</a>
-          <div class="description">Reddit特定频道最热门帖子聚合</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="aisnakeoil">
-        <div class="resource-content">
-          <a href="https://www.aisnakeoil.com/" target="_blank">AI Snake Oil</a>
-          <div class="description">
-            Sayash Kapoor和Arvind Narayanan的AI批判博客
-          </div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>7. AI工具发现与评测</h2>
-
-      <div class="resource" data-id="futuretools">
-        <div class="resource-content">
-          <a href="https://www.futuretools.io/" target="_blank">Future Tools</a>
-          <div class="description">AI工具导航与评测</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="futurepedia">
-        <div class="resource-content">
-          <a href="https://www.futurepedia.io/" target="_blank">Futurepedia</a>
-          <div class="description">AI工具目录，分类细致</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-    </div>
-
-    <div class="category">
-      <h2>8. 专题阅读与深度内容</h2>
-
-      <div class="resource" data-id="llms-explained-part1">
-        <div class="resource-content">
-          <a
-            href="https://freedium.cfd/https://medium.com/data-science-collective/llms-explained-part-1-the-3-layer-framework-behind-chatgpt-friends-6189c3fa8ae3#bypass"
-            target="_blank"
-            >LLMs Explained Part 1: The 3-Layer Framework Behind ChatGPT &
-            Friends</a
-          >
-          <div class="description">
-            深入解析大语言模型的三层框架结构，了解ChatGPT等模型的工作原理
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
