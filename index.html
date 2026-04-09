@@ -201,6 +201,22 @@
         line-height: 1.125;
       }
 
+      .category h3 {
+        color: var(--subheader-color);
+        margin: 32px 0 18px 0;
+        border: none;
+        padding: 0;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.25;
+        opacity: 0.95;
+      }
+
+      .category h3:first-of-type {
+        margin-top: 0;
+      }
+
       .category {
         background: var(--glass-bg);
         border: 1px solid var(--glass-border);
@@ -431,6 +447,10 @@
           font-size: 28px;
         }
 
+        .category h3 {
+          font-size: 18px;
+        }
+
         .category {
           padding: 24px 20px;
           margin-bottom: 32px;
@@ -558,7 +578,7 @@
     </div>
 
     <div class="category">
-      <h2>1. 官方博客与研究机构</h2>
+      <h2>1. 官方博客、平台与研究机构</h2>
 
       <div class="resource" data-id="deepmind">
         <div class="resource-content">
@@ -644,21 +664,23 @@
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="cursor-blog">
+      <div class="resource" data-id="huggingface">
         <div class="resource-content">
-          <a href="https://cursor.com/cn/blog" target="_blank">Cursor Blog</a>
+          <a href="https://huggingface.co/blog" target="_blank"
+            >Hugging Face Blog</a
+          >
           <div class="description">
-            Cursor 官方博客，涵盖 AI 编程、Agent、产品更新与研究进展
+            AI 与开源模型社区官方动态：Transformers、模型与应用实践
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="stripe-dev-blog">
+      <div class="resource" data-id="cursor-blog">
         <div class="resource-content">
-          <a href="https://stripe.dev/blog" target="_blank">Stripe Developer Blog</a>
+          <a href="https://cursor.com/cn/blog" target="_blank">Cursor Blog</a>
           <div class="description">
-            Stripe 开发者博客：API、支付基础设施、开发者体验与工程实践
+            Cursor 官方博客，涵盖 AI 编程、Agent、产品更新与研究进展
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
@@ -688,7 +710,7 @@
             >Google机器学习速成课程</a
           >
           <div class="description">
-            Google官方机器学习入门课程，包含100多种锻炼、12个模块、15小时内容
+            Google官方机器学习入门课程，包含100多种练习、12个模块、约15小时内容
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
@@ -729,17 +751,9 @@
           <a href="https://github.com/trending" target="_blank"
             >GitHub Trending</a
           >
-          <div class="description">每日热门AI开源项目</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="huggingface">
-        <div class="resource-content">
-          <a href="https://huggingface.co/blog" target="_blank"
-            >Hugging Face Blog</a
-          >
-          <div class="description">Transformer库、开源模型与应用</div>
+          <div class="description">
+            GitHub 全站当日热门仓库，可按语言筛选；适合发现 AI/ML 相关开源动向
+          </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
@@ -822,7 +836,9 @@
     </div>
 
     <div class="category">
-      <h2>4. 技术资讯与社区</h2>
+      <h2>4. 资讯与订阅</h2>
+
+      <h3>社区与媒体</h3>
 
       <div class="resource" data-id="hackernews">
         <div class="resource-content">
@@ -846,24 +862,6 @@
         <button class="star-btn" title="收藏">☆</button>
       </div>
 
-      <div class="resource" data-id="reddit">
-        <div class="resource-content">
-          <a href="https://www.reddit.com/r/MachineLearning/" target="_blank"
-            >Reddit r/MachineLearning</a
-          >
-          <div class="description">最大ML社区讨论最新论文</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="topsub">
-        <div class="resource-content">
-          <a href="https://topsub.cc/" target="_blank">TopSub</a>
-          <div class="description">Reddit特定频道最热门帖子聚合</div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
       <div class="resource" data-id="medium">
         <div class="resource-content">
           <a href="https://medium.com/" target="_blank">Medium</a>
@@ -883,10 +881,32 @@
         </div>
         <button class="star-btn" title="收藏">☆</button>
       </div>
-    </div>
 
-    <div class="category">
-      <h2>5. 周刊与Newsletter</h2>
+      <div class="resource" data-id="stripe-dev-blog">
+        <div class="resource-content">
+          <a href="https://stripe.dev/blog" target="_blank"
+            >Stripe Developer Blog</a
+          >
+          <div class="description">
+            支付与开发者基础设施大厂工程博客：API、可靠性与开发者体验（非 AI 垂类，偏通用后端与平台实践）
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <div class="resource" data-id="quanta">
+        <div class="resource-content">
+          <a href="https://www.quantamagazine.org/" target="_blank"
+            >Quanta Magazine</a
+          >
+          <div class="description">
+            科学新闻杂志级报道，数学、物理、生物与计算（含 AI）等前沿研究，非个人博客
+          </div>
+        </div>
+        <button class="star-btn" title="收藏">☆</button>
+      </div>
+
+      <h3>周刊与 Newsletter</h3>
 
       <div class="resource" data-id="thebatch">
         <div class="resource-content">
@@ -918,7 +938,7 @@
             >Lenny's Newsletter</a
           >
           <div class="description">
-            产品构建、增长驱动和职业发展的周刊，超过110万订阅者
+            产品、增长与职业发展向周刊，部分议题涉及 AI 产品与团队实践；不全是技术或模型话题
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
@@ -936,7 +956,7 @@
     </div>
 
     <div class="category">
-      <h2>6. 个人博客与深度思考</h2>
+      <h2>5. 技术博客与专栏</h2>
 
       <div class="resource" data-id="simonwillison">
         <div class="resource-content">
@@ -1008,32 +1028,7 @@
             >Senior Data Science Lead</a
           >
           <div class="description">
-            帮助管理者构建世界级团队，数据专业人士掌握讲故事技巧，指导数据科学入门者
-          </div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="quanta">
-        <div class="resource-content">
-          <a href="https://www.quantamagazine.org/" target="_blank"
-            >Quanta Magazine</a
-          >
-          <div class="description">
-            高质量科学与数学新闻，涵盖AI、物理、生物等前沿研究
-          </div>
-        </div>
-        <button class="star-btn" title="收藏">☆</button>
-      </div>
-
-      <div class="resource" data-id="simon-sinek">
-        <div class="resource-content">
-          <a href="https://simonsinek.com/stories/" target="_blank"
-            >Simon Sinek Stories & Articles</a
-          >
-          <div class="description">
-            领导力专家Simon
-            Sinek的深度文章，探讨目标发现、领导力发展和组织文化建设
+            数据科学与团队管理向 Substack 专栏（叙事与领导力），与 ML 模型论文非同一类读物
           </div>
         </div>
         <button class="star-btn" title="收藏">☆</button>
